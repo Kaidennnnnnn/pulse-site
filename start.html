@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A0E14">
+<meta name="description" content="Pulse teaches trading in short lessons, quick questions and practice with virtual money. Try the first lesson on this page. Education only, not financial advice.">
+<title>Pulse first lesson</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: one narrow column, phone first. The first screen is the promise and a lesson you can start at once.
+   The facts and the test notice sit one short scroll below. One dark look, by choice: it is the app's own. */
+:root {
+  --bg: #0A0E14;
+  --bg-lift: #0E131B;
+  --surface: #121821;
+  --raised: #1A2230;
+  --fg: #F2F5F9;
+  --fg-2: #A6B0C0;
+  --fg-3: #7E899B;
+  --line: rgba(255, 255, 255, .08);
+  --line-strong: rgba(255, 255, 255, .17);
+  --accent: #7C8CFF;
+  --accent-ink: #0A0E14;
+  --accent-soft: rgba(124, 140, 255, .13);
+  --accent-glow: rgba(124, 140, 255, .20);
+  --gain: #2BD9A0;
+  --gain-soft: rgba(43, 217, 160, .12);
+  --loss: #FF5C7A;
+  --loss-soft: rgba(255, 92, 122, .12);
+  --caution: #FFB547;
+  --caution-soft: rgba(255, 181, 71, .10);
+  --caution-line: rgba(255, 181, 71, .50);
+  --shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 28px 56px -28px rgba(0, 0, 0, .80);
+
+  --text: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --num: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif;
+
+  --radius: 20px;
+  --gutter: 20px;
+  color-scheme: dark;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: radial-gradient(90% 340px at 50% -70px, var(--accent-glow), rgba(124, 140, 255, 0) 72%) no-repeat, var(--bg);
+  color: var(--fg);
+  font: 400 17px/1.5 var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, ul, dl, dd { margin: 0; }
+ul { padding: 0; list-style: none; }
+svg { display: block; flex: none; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+[tabindex="-1"]:focus { outline: none; }
+
+.page {
+  max-width: 34rem;
+  margin-inline: auto;
+  padding-block: 14px 44px;
+  padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+main { display: flex; flex-direction: column; gap: 30px; }
+
+/* ---------- Top line ---------- */
+.top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 12px; }
+.brand { display: flex; align-items: center; gap: 10px; font: 700 19px/1 var(--display); letter-spacing: -0.01em; }
+.status {
+  padding: 7px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 13px;
+  line-height: 1;
+  color: var(--fg-2);
+  white-space: nowrap;
+}
+
+/* ---------- Hero ---------- */
+.hero { display: flex; flex-direction: column; gap: 12px; padding-top: 6px; }
+h1 { font: 700 clamp(31px, 8.9vw, 40px)/1.06 var(--display); letter-spacing: -0.025em; text-wrap: balance; }
+h1 .hl { display: block; color: var(--accent); }
+.lead { font-size: 18px; line-height: 1.42; color: var(--fg); text-wrap: pretty; }
+.edu { display: flex; gap: 8px; font-size: 13px; line-height: 1.45; color: var(--fg-2); }
+.edu svg { margin-top: 1px; color: var(--fg-3); }
+
+/* ---------- Shared pieces ---------- */
+.eyebrow { font: 600 12px/1.3 var(--text); letter-spacing: .09em; text-transform: uppercase; color: var(--fg-3); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.section { display: flex; flex-direction: column; gap: 12px; }
+
+.btn {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  margin: 0;
+  padding: 14px 18px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background: var(--raised);
+  color: var(--fg);
+  font: 600 17px/1.2 var(--text);
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .08s ease, filter .15s ease;
+}
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.quiet { background: transparent; border-color: var(--line-strong); color: var(--fg); }
+.btn:disabled { background: var(--raised); color: var(--fg-3); cursor: default; }
+.btn:not(:disabled):active { transform: scale(.985); }
+.btn:focus-visible { border-radius: 16px; }
+@media (hover: hover) { .btn:not(:disabled):hover { filter: brightness(1.07); } }
+
+/* Tick and cross, drawn in CSS so they take the tokens. */
+.mark-ok, .mark-no,
+.opt.is-right .opt-mark, .opt.is-wrong .opt-mark { position: relative; flex: none; width: 22px; height: 22px; border-radius: 50%; }
+.mark-ok, .opt.is-right .opt-mark { background: var(--gain); }
+.mark-ok::after, .opt.is-right .opt-mark::after {
+  content: ""; position: absolute; left: 8px; top: 4.5px; width: 6px; height: 10.5px;
+  border: solid var(--bg); border-width: 0 2.2px 2.2px 0; transform: rotate(45deg);
+}
+.mark-no, .opt.is-wrong .opt-mark { background: var(--loss); }
+.mark-no::before, .mark-no::after,
+.opt.is-wrong .opt-mark::before, .opt.is-wrong .opt-mark::after {
+  content: ""; position: absolute; left: 9.9px; top: 5px; width: 2.2px; height: 12px; border-radius: 2px; background: var(--bg);
+}
+.mark-no::before, .opt.is-wrong .opt-mark::before { transform: rotate(45deg); }
+.mark-no::after, .opt.is-wrong .opt-mark::after { transform: rotate(-45deg); }
+
+/* ---------- The lesson ---------- */
+.lesson {
+  background: var(--bg-lift);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  scroll-margin: 12px 0 16px;
+}
+.lesson-bar { display: flex; align-items: center; gap: 8px; padding: 8px 18px 0 6px; }
+.back {
+  -webkit-appearance: none;
+  appearance: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: var(--fg-2);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.progress { flex: 1; min-width: 0; height: 8px; border-radius: 999px; background: var(--raised); overflow: hidden; }
+.progress span { display: block; width: 0; height: 100%; border-radius: 999px; background: var(--gain); transition: width .3s ease; }
+.count { min-width: 30px; text-align: right; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--fg-3); }
+
+.step { display: flex; flex-direction: column; gap: 12px; min-height: 330px; padding: var(--gutter); }
+.step[data-step="intro"] { min-height: 0; }
+.lesson-bar:not([hidden]) + .steps .step { padding-top: 10px; }
+.step > .btn, .step > .actions { margin-top: auto; }
+.actions { display: grid; gap: 10px; }
+.step h2 { font: 700 30px/1.1 var(--display); letter-spacing: -0.02em; text-wrap: balance; }
+.step h3 { font: 700 24px/1.16 var(--display); letter-spacing: -0.018em; text-wrap: balance; }
+.hook, .body { font-size: 18px; line-height: 1.5; text-wrap: pretty; }
+.hook { color: var(--fg-2); }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 18px; padding-bottom: 6px; font-size: 14px; color: var(--fg-2); }
+.meta li { display: flex; align-items: center; gap: 7px; }
+.meta svg { color: var(--fg-3); }
+.tile { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 13px; background: var(--accent-soft); color: var(--accent); }
+.tile.done { background: var(--gain-soft); color: var(--gain); }
+
+.options { display: grid; gap: 10px; padding-top: 2px; }
+.opt { position: relative; display: block; }
+.opt input {
+  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.opt input:disabled { cursor: default; }
+.opt-box {
+  display: flex; align-items: center; gap: 12px; min-height: 58px; padding: 14px 16px;
+  background: var(--surface); border: 1.5px solid var(--line-strong); border-radius: 16px;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.opt-text { flex: 1; min-width: 0; font-size: 17px; line-height: 1.35; }
+.opt-mark { display: none; }
+.opt input:checked + .opt-box { border-color: var(--accent); background: var(--accent-soft); }
+.opt input:focus-visible + .opt-box { outline: 2px solid var(--accent); outline-offset: 3px; }
+.opt.is-right input + .opt-box { border-color: var(--gain); background: var(--gain-soft); }
+.opt.is-wrong input + .opt-box { border-color: var(--loss); background: var(--loss-soft); }
+.opt.is-right .opt-mark, .opt.is-wrong .opt-mark { display: block; }
+
+.feedback {
+  display: grid; gap: 10px; scroll-margin-bottom: 16px;
+  margin: auto calc(var(--gutter) * -1) calc(var(--gutter) * -1);
+  padding: 18px var(--gutter) var(--gutter);
+  border-top: 1px solid var(--line);
+}
+.step[data-result="right"] .feedback { background: var(--gain-soft); }
+.step[data-result="wrong"] .feedback { background: var(--loss-soft); }
+.verdict { display: flex; align-items: center; gap: 10px; font: 700 20px/1.2 var(--display); }
+.verdict.right { color: var(--gain); }
+.verdict.wrong { color: var(--loss); }
+.answer { font-size: 16px; font-weight: 600; line-height: 1.4; }
+.why { font-size: 16px; line-height: 1.45; color: var(--fg-2); }
+.feedback .btn { margin-top: 6px; color: var(--accent-ink); }
+.step[data-result="right"] .feedback .btn { background: var(--gain); }
+.step[data-result="wrong"] .feedback .btn { background: var(--loss); }
+
+.takeaways { display: grid; gap: 10px; padding-bottom: 8px; }
+.takeaways li { display: flex; gap: 10px; font-size: 16px; line-height: 1.42; }
+.takeaways li::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: 9px; border-radius: 50%; background: var(--accent); }
+.label { padding-top: 4px; font-size: 14px; font-weight: 600; line-height: 1.3; color: var(--fg-2); }
+.more { font-size: 15px; line-height: 1.45; color: var(--fg-2); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lesson.live .step:not([hidden]) { animation: step-in .22s ease both; }
+  .feedback:not([hidden]) { animation: step-in .2s ease both; }
+}
+@keyframes step-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .progress span, .btn, .opt-box { transition: none; }
+}
+
+/* ---------- Facts ---------- */
+.stats { display: grid; grid-template-columns: 1fr 1fr; }
+.stats > div { display: flex; flex-direction: column-reverse; gap: 3px; min-width: 0; padding: 16px 18px 15px; }
+.stats > div:nth-child(odd) { border-right: 1px solid var(--line); }
+.stats > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+.stats dd { font: 700 31px/1.05 var(--num); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+.stats dt { font-size: 14px; line-height: 1.3; color: var(--fg-2); }
+.rows { border-top: 1px solid var(--line); }
+.rows li { display: flex; align-items: center; gap: 11px; padding: 14px 18px; font-size: 15px; line-height: 1.35; }
+.rows li + li { border-top: 1px solid var(--line); }
+.rows li::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+/* ---------- Test notice ---------- */
+.notify h2 { font: 700 22px/1.18 var(--display); letter-spacing: -0.015em; text-wrap: balance; }
+.notice { padding: 18px; }
+.note { font-size: 16px; line-height: 1.45; color: var(--fg-2); }
+
+/* ---------- Foot ---------- */
+.foot { display: flex; flex-direction: column; gap: 10px; padding-top: 22px; border-top: 1px solid var(--line); }
+.foot .brand { font-size: 16px; gap: 8px; }
+.foot p { font-size: 13px; line-height: 1.5; color: var(--fg-2); }
+</style>
+</head>
+<body>
+<div class="page" lang="en-GB">
+
+  <header class="top">
+    <div class="brand">
+      <svg viewBox="0 0 64 64" width="34" height="34" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="15" fill="#0F141E"/><rect x=".5" y=".5" width="63" height="63" rx="14.5" fill="none" stroke="#FFFFFF" stroke-opacity=".08"/><path d="M8 35H20.3L24.4 32.5L27.5 39.4L31.3 16.3L35.6 49.4L39.4 29.4L42.5 35H56.5" fill="none" stroke="#7C8CFF" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="55.6" cy="17.6" r="3.1" fill="#2BD9A0"/></svg>
+      <span>Pulse</span>
+    </div>
+    <p class="status">iPhone app, in testing</p>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 id="hero-title">Learn to trade <span class="hl">the way you learn a language.</span></h1>
+      <p class="lead">Short lessons, quick questions and practice with virtual money.</p>
+      <p class="edu">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.6"/><path d="M12 11v5.4M12 7.6v.2"/></svg>
+        <span>Education only, not financial advice. Practice uses virtual money.</span>
+      </p>
+    </section>
+
+    <section class="lesson" id="lesson" aria-labelledby="lesson-title">
+      <div class="lesson-bar" id="lesson-bar" hidden>
+        <button type="button" class="back" id="back" aria-label="Back one step">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m14.5 5.5-6.5 6.5 6.5 6.5"/></svg>
+        </button>
+        <div class="progress" id="progress" role="progressbar" aria-label="Lesson progress" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0"><span id="bar"></span></div>
+        <span class="count" id="count" aria-hidden="true"></span>
+      </div>
+
+      <div class="steps">
+
+        <div class="step" data-step="intro">
+          <p class="eyebrow">Free first lesson</p>
+          <h2 id="lesson-title" tabindex="-1">What is a stock?</h2>
+          <p class="hook">When you buy one share, you own a tiny slice of a company. Why does that slice change price every second?</p>
+          <ul class="meta">
+            <li><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9.5 18h5M10.5 21h3M12 3a6 6 0 0 0-3.7 10.7c.7.6 1.1 1.3 1.2 2.1h5c.1-.8.5-1.5 1.2-2.1A6 6 0 0 0 12 3Z"/></svg>4 ideas</li>
+            <li><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h2.5M4 12h2.5M4 17h2.5M10 7h10M10 12h10M10 17h10"/></svg>3 questions</li>
+          </ul>
+          <button type="button" class="btn primary" data-go="next">Start the lesson</button>
+        </div>
+
+        <div class="step" data-step="idea" hidden>
+          <div class="tile"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16M16 10h2a2 2 0 0 1 2 2v9M3 21h18M9 7.5h3M9 11.5h3M9 15.5h3"/></svg></div>
+          <p class="eyebrow">Idea 1 of 4</p>
+          <h3 tabindex="-1" data-lesson="card">Ownership</h3>
+          <p class="body" data-lesson="card-body">A share is a unit of ownership in a company. Owners share in its profits, through dividends or a rising share price, and in its losses.</p>
+          <button type="button" class="btn primary" data-go="next">Continue</button>
+        </div>
+
+        <div class="step" data-step="idea" hidden>
+          <div class="tile"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 20V5M4.5 8.5 8 5l3.5 3.5M16 4v15M12.5 15.5 16 19l3.5-3.5"/></svg></div>
+          <p class="eyebrow">Idea 2 of 4</p>
+          <h3 tabindex="-1" data-lesson="card">Why prices move</h3>
+          <p class="body" data-lesson="card-body">A price is simply the last amount a buyer and seller agreed on. When more people want to buy than sell, buyers must pay more, and the price rises.</p>
+          <button type="button" class="btn primary" data-go="next">Continue</button>
+        </div>
+
+        <div class="step" data-step="question" data-answer="2" hidden>
+          <p class="eyebrow">Pick the right answer</p>
+          <h3 tabindex="-1" id="q1-title" data-lesson="q">What does owning a share give you?</h3>
+          <div class="options" role="radiogroup" aria-labelledby="q1-title">
+            <label class="opt"><input type="radio" name="q1" id="q1-a" value="0"><span class="opt-box"><span class="opt-text" data-lesson="opt">A fixed interest payment</span><span class="opt-mark" aria-hidden="true"></span></span></label>
+            <label class="opt"><input type="radio" name="q1" id="q1-b" value="1"><span class="opt-box"><span class="opt-text" data-lesson="opt">A loan to the company</span><span class="opt-mark" aria-hidden="true"></span></span></label>
+            <label class="opt"><input type="radio" name="q1" id="q1-c" value="2"><span class="opt-box"><span class="opt-text" data-lesson="opt">A slice of ownership in the company</span><span class="opt-mark" aria-hidden="true"></span></span></label>
+          </div>
+          <button type="button" class="btn primary check" disabled>Check</button>
+          <div class="feedback" hidden>
+            <p class="verdict right" tabindex="-1" hidden><span class="mark-ok" aria-hidden="true"></span>Correct!</p>
+            <p class="verdict wrong" tabindex="-1" hidden><span class="mark-no" aria-hidden="true"></span>Not quite</p>
+            <p class="answer" hidden>Correct answer: A slice of ownership in the company</p>
+            <p class="why" data-lesson="why">A share is ownership. A loan to a company is a bond.</p>
+            <button type="button" class="btn" data-go="next">Continue</button>
+          </div>
+        </div>
+
+        <div class="step" data-step="idea" hidden>
+          <div class="tile"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 10h16M8.5 3v4M15.5 3v4"/></svg></div>
+          <p class="eyebrow">Idea 3 of 4</p>
+          <h3 tabindex="-1" data-lesson="card">Long-term driver</h3>
+          <p class="body" data-lesson="card-body">Over years, share prices tend to follow a company's earnings. Over days, they follow news, emotion and the flow of orders.</p>
+          <button type="button" class="btn primary" data-go="next">Continue</button>
+        </div>
+
+        <div class="step" data-step="idea" hidden>
+          <div class="tile"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.6"/><path d="M3.4 12h17.2M12 3.4c2.4 2.3 3.6 5.2 3.6 8.6s-1.2 6.3-3.6 8.6c-2.4-2.3-3.6-5.2-3.6-8.6S9.6 5.7 12 3.4Z"/></svg></div>
+          <p class="eyebrow">Idea 4 of 4</p>
+          <h3 tabindex="-1" data-lesson="card">Where they trade</h3>
+          <p class="body" data-lesson="card-body">Shares trade on exchanges such as the NYSE and Nasdaq in New York, the LSE in London and Euronext in Paris, each with its own opening hours.</p>
+          <button type="button" class="btn primary" data-go="next">Continue</button>
+        </div>
+
+        <div class="step" data-step="question" data-answer="2" hidden>
+          <p class="eyebrow">Pick the right answer</p>
+          <h3 tabindex="-1" id="q2-title" data-lesson="q">In the short term, what mostly moves prices?</h3>
+          <div class="options" role="radiogroup" aria-labelledby="q2-title">
+            <label class="opt"><input type="radio" name="q2" id="q2-a" value="0"><span class="opt-box"><span class="opt-text" data-lesson="opt">The government</span><span class="opt-mark" aria-hidden="true"></span></span></label>
+            <label class="opt"><input type="radio" name="q2" id="q2-b" value="1"><span class="opt-box"><span class="opt-text" data-lesson="opt">Only quarterly earnings</span><span class="opt-mark" aria-hidden="true"></span></span></label>
+            <label class="opt"><input type="radio" name="q2" id="q2-c" value="2"><span class="opt-box"><span class="opt-text" data-lesson="opt">Supply and demand from orders, driven by news and emotion</span><span class="opt-mark" aria-hidden="true"></span></span></label>
+          </div>
+          <button type="button" class="btn primary check" disabled>Check</button>
+          <div class="feedback" hidden>
+            <p class="verdict right" tabindex="-1" hidden><span class="mark-ok" aria-hidden="true"></span>Correct!</p>
+            <p class="verdict wrong" tabindex="-1" hidden><span class="mark-no" aria-hidden="true"></span>Not quite</p>
+            <p class="answer" hidden>Correct answer: Supply and demand from orders, driven by news and emotion</p>
+            <p class="why" data-lesson="why">Day to day, orders and sentiment dominate. Earnings matter more over years.</p>
+            <button type="button" class="btn" data-go="next">Continue</button>
+          </div>
+        </div>
+
+        <div class="step" data-step="question" data-answer="0" hidden>
+          <p class="eyebrow">Pick the right answer</p>
+          <h3 tabindex="-1" id="q3-title" data-lesson="q">If many more people want to buy than sell, the price will usually...</h3>
+          <div class="options" role="radiogroup" aria-labelledby="q3-title">
+            <label class="opt"><input type="radio" name="q3" id="q3-a" value="0"><span class="opt-box"><span class="opt-text" data-lesson="opt">Rise</span><span class="opt-mark" aria-hidden="true"></span></span></label>
+            <label class="opt"><input type="radio" name="q3" id="q3-b" value="1"><span class="opt-box"><span class="opt-text" data-lesson="opt">Stay the same</span><span class="opt-mark" aria-hidden="true"></span></span></label>
+            <label class="opt"><input type="radio" name="q3" id="q3-c" value="2"><span class="opt-box"><span class="opt-text" data-lesson="opt">Fall</span><span class="opt-mark" aria-hidden="true"></span></span></label>
+          </div>
+          <button type="button" class="btn primary check" disabled>Check</button>
+          <div class="feedback" hidden>
+            <p class="verdict right" tabindex="-1" hidden><span class="mark-ok" aria-hidden="true"></span>Correct!</p>
+            <p class="verdict wrong" tabindex="-1" hidden><span class="mark-no" aria-hidden="true"></span>Not quite</p>
+            <p class="answer" hidden>Correct answer: Rise</p>
+            <p class="why" data-lesson="why">Buyers must offer more to find sellers, so the price rises.</p>
+            <button type="button" class="btn" data-go="next">Continue</button>
+          </div>
+        </div>
+
+        <div class="step" data-step="done" hidden>
+          <div class="tile done"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5 12.6 4.4 4.4L19 7.4"/></svg></div>
+          <p class="eyebrow">Lesson complete</p>
+          <h3 tabindex="-1">You got <span id="score">0</span> of 3 right.</h3>
+          <p class="label" id="remember">What to remember</p>
+          <ul class="takeaways" aria-labelledby="remember">
+            <li data-lesson="takeaway">A share is a slice of ownership in a company.</li>
+            <li data-lesson="takeaway">A price is the last amount a buyer and seller agreed on.</li>
+            <li data-lesson="takeaway">Over years prices follow earnings; over days they follow news, emotion and orders.</li>
+          </ul>
+          <div class="actions">
+            <button type="button" class="btn primary" id="see-inside">See what is inside the app</button>
+            <button type="button" class="btn quiet" id="again">Do the lesson again</button>
+          </div>
+        </div>
+
+      </div>
+      <noscript><p class="more" style="padding: 0 20px 20px">This lesson needs JavaScript. Turn it on to try it.</p></noscript>
+    </section>
+
+    <section class="section facts" id="inside" aria-labelledby="facts-title">
+      <h2 class="eyebrow" id="facts-title" tabindex="-1">Inside the app</h2>
+      <div class="panel">
+        <dl class="stats">
+          <div><dt>courses</dt><dd>74</dd></div>
+          <div><dt>lessons</dt><dd>686</dd></div>
+          <div><dt>trader words</dt><dd>1,114</dd></div>
+          <div><dt>languages</dt><dd>12</dd></div>
+        </dl>
+        <ul class="rows">
+          <li>Free while it is in testing</li>
+          <li>iPhone app, in testing</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section notify" id="notify" aria-labelledby="notify-title">
+      <h2 id="notify-title">Be told when the iPhone test opens</h2>
+      <!-- Interim block. The owner chose a form link: when he sends it, add a button here that opens it,
+           and a line saying what the address is used for. Until then nothing is collected. -->
+      <div class="panel notice" id="notify-notice">
+        <p class="note">The test is not open yet. It will be announced on the Pulse Instagram and TikTok.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="brand">
+      <svg viewBox="0 0 64 64" width="26" height="26" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="15" fill="#0F141E"/><rect x=".5" y=".5" width="63" height="63" rx="14.5" fill="none" stroke="#FFFFFF" stroke-opacity=".08"/><path d="M8 35H20.3L24.4 32.5L27.5 39.4L31.3 16.3L35.6 49.4L39.4 29.4L42.5 35H56.5" fill="none" stroke="#7C8CFF" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="55.6" cy="17.6" r="3.1" fill="#2BD9A0"/></svg>
+      <span>Pulse</span>
+    </div>
+    <p>Education only, not financial advice. Practice uses virtual money.</p>
+  </footer>
+
+</div>
+<script>
+/* The lesson. Every word a visitor can read is in the markup above, so this script holds no wording at all. */
+(function () {
+  'use strict';
+  var lesson = document.getElementById('lesson');
+  if (!lesson) { return; }
+  var steps = Array.prototype.slice.call(lesson.querySelectorAll('.step'));
+  var barRow = document.getElementById('lesson-bar');
+  var progress = document.getElementById('progress');
+  var bar = document.getElementById('bar');
+  var count = document.getElementById('count');
+  var score = document.getElementById('score');
+  var total = steps.length - 2;   /* ideas and questions: the opening and closing cards are not counted */
+  var current = 0;
+  var calm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  function reach(el) {
+    if (!el) { return; }
+    try { el.focus({ preventScroll: true }); } catch (e) { el.focus(); }
+  }
+
+  /* Keep the card on screen after each step, so the next button never sits below the fold on a short screen. */
+  function bring(el) {
+    var box = el.getBoundingClientRect();
+    if (box.top < 0 || box.bottom > window.innerHeight) {
+      el.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: box.height > window.innerHeight ? 'start' : 'nearest' });
+    }
+  }
+
+  function right() {
+    return steps.filter(function (s) { return s.getAttribute('data-result') === 'right'; }).length;
+  }
+
+  function show(index, moved) {
+    current = Math.max(0, Math.min(steps.length - 1, index));
+    var at = Math.min(current, total);
+    steps.forEach(function (s, n) { s.hidden = n !== current; });
+    barRow.hidden = current === 0;
+    bar.style.width = (at / total * 100) + '%';
+    progress.setAttribute('aria-valuemax', String(total));
+    progress.setAttribute('aria-valuenow', String(at));
+    count.textContent = at + '/' + total;
+    if (current === steps.length - 1) { score.textContent = String(right()); }
+    if (moved) {
+      lesson.classList.add('live');
+      bring(lesson);
+      reach(steps[current].querySelector('h2, h3'));
+    }
+  }
+
+  function clear(step) {
+    step.removeAttribute('data-result');
+    Array.prototype.forEach.call(step.querySelectorAll('.opt'), function (opt) {
+      opt.classList.remove('is-right', 'is-wrong');
+    });
+    Array.prototype.forEach.call(step.querySelectorAll('input'), function (input) {
+      input.checked = false;
+      input.disabled = false;
+    });
+    var check = step.querySelector('.check');
+    check.hidden = false;
+    check.disabled = true;
+    step.querySelector('.feedback').hidden = true;
+  }
+
+  steps.forEach(function (step) {
+    if (step.getAttribute('data-step') !== 'question') { return; }
+    var answer = Number(step.getAttribute('data-answer'));
+    var inputs = Array.prototype.slice.call(step.querySelectorAll('input'));
+    var check = step.querySelector('.check');
+    var feedback = step.querySelector('.feedback');
+    clear(step);   /* a browser may restore ticked boxes when the page is reloaded */
+
+    inputs.forEach(function (input) {
+      input.addEventListener('change', function () { check.disabled = false; });
+    });
+
+    check.addEventListener('click', function () {
+      var picked = inputs.filter(function (input) { return input.checked; })[0];
+      if (!picked) { return; }
+      var ok = Number(picked.value) === answer;
+      step.setAttribute('data-result', ok ? 'right' : 'wrong');
+      inputs.forEach(function (input, n) {
+        var opt = input.parentNode;
+        if (n === answer) { opt.classList.add('is-right'); }
+        else if (input.checked) { opt.classList.add('is-wrong'); }
+        input.disabled = true;
+      });
+      var good = feedback.querySelector('.verdict.right');
+      var bad = feedback.querySelector('.verdict.wrong');
+      good.hidden = !ok;
+      bad.hidden = ok;
+      feedback.querySelector('.answer').hidden = ok;
+      check.hidden = true;
+      feedback.hidden = false;
+      lesson.classList.add('live');
+      bring(feedback);
+      reach(ok ? good : bad);
+    });
+  });
+
+  lesson.addEventListener('click', function (event) {
+    var target = event.target;
+    while (target && target !== lesson && !(target.getAttribute && target.getAttribute('data-go'))) {
+      target = target.parentNode;
+    }
+    if (target && target !== lesson) { show(current + 1, true); }
+  });
+
+  document.getElementById('back').addEventListener('click', function () { show(current - 1, true); });
+
+  document.getElementById('again').addEventListener('click', function () {
+    steps.forEach(function (step) {
+      if (step.getAttribute('data-step') === 'question') { clear(step); }
+    });
+    show(0, true);
+  });
+
+  document.getElementById('see-inside').addEventListener('click', function () {
+    var inside = document.getElementById('inside');
+    inside.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
+    reach(document.getElementById('facts-title'));
+  });
+
+  show(0, false);
+}());
+</script>
+</body>
+</html>
